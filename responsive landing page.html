@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultra Stylish Nav</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: 0.3s ease-in-out;
+      z-index: 1000;
+    }
+
+    nav.scrolled {
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 10px 18px;
+      border-radius: 30px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 255, 255, 0.15);
+      border-radius: 30px;
+      transform: translate(-50%, -50%) scale(0);
+      transition: 0.3s ease;
+      z-index: -1;
+    }
+
+    nav a:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    nav a:hover {
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 130px 20px;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #0ff;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="#home">🏠 Home</a>
+    <a href="#about">👨‍💼 About</a>
+    <a href="#services">🧰 Services</a>
+    <a href="#contact">📞 Contact</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to the Future</h2>
+    <p>Experience an ultra-stylish navigation menu with scrolling interaction and glowing effects.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We’re a team of designers and developers who craft sleek, immersive experiences for the web.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <p>From custom websites to mobile apps, UI/UX design to 3D animations — we do it all.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Let’s Connect</h2>
+    <p>Reach out and let’s build something beautiful together. 🌟</p>
+  </section>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    const sections = document.querySelectorAll("section");
+
+    window.addEventListener('scroll', () => {
+      // Toggle nav style
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+
+      // Reveal sections on scroll
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add('visible');
+        }
+      });
+    });
+
+    // Initial trigger
+    window.dispatchEvent(new Event('scroll'));
+  </script>
+
+</body>
+</html>
